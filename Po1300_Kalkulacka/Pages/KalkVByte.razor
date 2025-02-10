@@ -1,0 +1,66 @@
+﻿@page "/kalkVByte"
+
+<PageTitle>Kalkulačka Byte</PageTitle>
+
+<h1>Základní matematické operace - Byte</h1>
+<hr />
+<label>Číslo 1: <input @bind="cislo1" />  </label>
+<label>Číslo 2: <input @bind="cislo2" />  </label>
+
+<div class="m-3">
+	<button @onclick="Secti" type="button" class="btn">Součet (+)</button>
+	<button @onclick="Rozdil" type="button" class="btn btn-primary">Rozdíl (-)</button>
+	<button @onclick="Soucin" type="button" class="btn btn-secondary">Součin (*)</button>
+	<button @onclick="Podil" type="button" class="btn btn-success">Podíl (/)</button>
+</div>
+<label>Výsledek: <input @bind="vysledek" readonly />  </label>
+
+
+@code {
+	/// <summary>
+	/// První vstupní číslo.
+	/// </summary>
+	private byte cislo1;
+
+	/// <summary>
+	/// Druhé vstupní číslo.
+	/// </summary>
+	private byte cislo2;
+
+	/// <summary>
+	/// Výsledek matematické operace.
+	/// </summary>
+	private byte vysledek;
+
+	/// <summary>
+	/// Sečte dvě čísla a uloží výsledek.
+	/// </summary>
+	private void Secti()
+	{
+		vysledek = (byte)(cislo1 + cislo2);
+	}
+
+	/// <summary>
+	/// Odečte druhé číslo od prvního a uloží výsledek.
+	/// </summary>
+	private void Rozdil()
+	{
+		vysledek = (byte)(cislo1 - cislo2);
+	}
+
+	/// <summary>
+	/// Vynásobí dvě čísla a uloží výsledek.
+	/// </summary>
+	private void Soucin()
+	{
+		vysledek = (byte)(cislo1 * cislo2);
+	}
+
+	/// <summary>
+	/// Vydělí první číslo druhým a uloží výsledek.
+	/// </summary>
+	private void Podil()
+	{
+		vysledek = (byte)(cislo1 / cislo2);
+	}
+}
