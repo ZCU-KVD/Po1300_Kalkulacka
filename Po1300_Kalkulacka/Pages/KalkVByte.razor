@@ -14,9 +14,19 @@
 	<button @onclick="Podil" type="button" class="btn btn-success">Podíl (/)</button>
 </div>
 <label>Výsledek: <input @bind="vysledek" readonly />  </label>
+<hr />
+<label><input type="checkbox" @bind-value="kontrolaPreteceni"/> Kontrola přetečení</label>
+
+@if (chyba != string.Empty)
+{
+	<div class="alert alert-danger">
+		<strong>Danger!</strong> @chyba
+	</div>
+}
 
 
 @code {
+	private bool kontrolaPreteceni;
 	/// <summary>
 	/// První vstupní číslo.
 	/// </summary>
@@ -32,12 +42,35 @@
 	/// </summary>
 	private byte vysledek;
 
+	private string chyba = "";
+
 	/// <summary>
 	/// Sečte dvě čísla a uloží výsledek.
 	/// </summary>
 	private void Secti()
 	{
-		vysledek = (byte)(cislo1 + cislo2);
+		chyba = "";
+		if (kontrolaPreteceni)
+		{ 
+			try
+			{
+				// Kontrola přetečení
+				checked
+				{
+					vysledek = (byte)(cislo1 + cislo2);
+				}
+			}
+			catch (Exception)
+			{
+				
+				chyba = "Přetečení";
+			}
+			
+		}
+		else
+			vysledek = (byte)(cislo1 + cislo2);
+
+		
 	}
 
 	/// <summary>
